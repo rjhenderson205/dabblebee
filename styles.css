@@ -137,10 +137,13 @@ nav {
 }
 
 .card img {
-  margin-bottom: 1rem;
   width: 80px;
   height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem auto;
 }
+
 
 .card h3 {
   margin-bottom: 1rem;
