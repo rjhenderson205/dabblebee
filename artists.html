@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featured Artists - Dabblebee</title>
+  <meta name="description" content="Explore creative works by independent artists on Dabblebee. Support original creators and discover unique talent.">
+  <meta name="keywords" content="artists, independent creators, commissions, portfolios, Dabblebee">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <img class="logo-icon" src="littleicon.png" alt="Dabblebee Icon" />
+          <h1 style="margin: 0; color: inherit;">dabblebee</h1>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="artist-hero">
+      <h2>Explore Creative Works by Independent Artists</h2>
+      <p>Support original creators and discover unique talent from the Dabblebee hive.</p>
+      <div class="artist-buttons">
+        <a href="#gallery" class="btn" aria-label="Browse Artists Section">Browse Artists</a>
+        <a href="#commissions" class="btn btn-commission" aria-label="Commissions Section">Commissions</a>
+      </div>
+    </section>
+
+    <section id="gallery" class="artist-gallery">
+      <h3>Featured Artists</h3>
+      <div class="artist-cards">
+        <!-- Repeat this block for each artist -->
+        <div class="artist-card">
+          <img src="artist1-thumbnail.jpg" alt="Artwork by ArtistName" />
+          <h4>ArtistName</h4>
+          <p>Specializes in character design and fantasy art.</p>
+          <a href="#" class="btn small" aria-label="View Portfolio of ArtistName">View Portfolio</a>
+        </div>
+        <!-- Add more artist cards here -->
+      </div>
+    </section>
+
+    <section id="commissions" class="commissions-section">
+      <h3>Commission an Artist</h3>
+      <p>Want something custom? Use our commission system to submit a request and support the artists directly.</p>
+      <a href="#" class="btn btn-commission">Start a Commission</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 dabblebee. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+</body>
+</html>

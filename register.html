@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Registration - Dabblebee</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <img class="logo-icon" src="littleicon.png" alt="Dabblebee Icon" />
+          <h1 style="margin: 0; color: inherit;">dabblebee</h1>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Register</h1>
+    <p>Join our community and explore the world of creativity, games, and more.</p>
+
+    <form action="/submit-registration" method="POST" enctype="multipart/form-data">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="user-type">I am a:</label>
+      <select id="user-type" name="user-type" required>
+        <option value="customer">Customer</option>
+        <option value="artist">Artist</option>
+        <option value="gamer">Gamer</option>
+      </select>
+
+      <label for="portfolio" id="portfolio-label" style="display: none;">Portfolio Link:</label>
+      <input type="url" id="portfolio" name="portfolio" style="display: none;" />
+
+      <label for="artwork" id="artwork-label" style="display: none;">Upload Artwork:</label>
+      <input type="file" id="artwork" name="artwork" accept="image/*" multiple style="display: none;" />
+
+      <button type="submit">Register</button>
+    </form>
+</main>
+
+<script>
+  const userType = document.getElementById('user-type');
+  const portfolioLabel = document.getElementById('portfolio-label');
+  const portfolioInput = document.getElementById('portfolio');
+  const artworkLabel = document.getElementById('artwork-label');
+  const artworkInput = document.getElementById('artwork');
+
+  userType.addEventListener('change', () => {
+    if (userType.value === 'artist') {
+      portfolioLabel.style.display = 'block';
+      portfolioInput.style.display = 'block';
+      artworkLabel.style.display = 'block';
+      artworkInput.style.display = 'block';
+    } else {
+      portfolioLabel.style.display = 'none';
+      portfolioInput.style.display = 'none';
+      artworkLabel.style.display = 'none';
+      artworkInput.style.display = 'none';
+    }
+  });
+</script>
+
+  <footer>
+    <p>&copy; 2025 dabblebee. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+</body>
+</html>
