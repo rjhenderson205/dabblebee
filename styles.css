@@ -265,6 +265,7 @@ footer {
   nav {
     flex-wrap: wrap; /* Allow wrapping */
     position: relative; /* For absolute positioning of nav links */
+    align-items: center; /* Vertically align items in the nav bar */
   }
 
   .mobile-nav-toggle {
@@ -282,7 +283,7 @@ footer {
     position: absolute;
     top: 100%;
     left: 0;
-    padding: 1rem 0;
+    padding: 0.5rem 0; /* Reduce vertical padding for mobile dropdown */
     box-shadow: 0 4px 6px var(--card-shadow);
     z-index: 1000;
   }
@@ -293,32 +294,15 @@ footer {
   
   .nav-links li {
     text-align: center;
-    padding: 0.8rem 0; /* Increase padding for mobile */
+    padding: 0.5rem 0; /* Reduce padding for individual mobile links */
   }
 
   #darkModeToggle {
-    /* ...existing code... */
-    width: 36px; /* Keep mobile size */
-    height: 36px;
-    font-size: 1.1rem;
+    order: 2; /* Place between toggle and links */
+    margin-left: auto; /* Push it towards the right, next to the toggle */
+    margin-right: 0.5rem; /* Add some space to its right */
   }
-  
-  .hero-content {
-    flex-direction: column;
-  }
-  
-  .hero-text, .hero-image {
-    flex: 1 1 100%;
-    text-align: center;
-  }
-  
-  .hero-text h2 {
-    font-size: 2rem;
-  }
-  
-  .hero-text p {
-    font-size: 1rem;
-  }
+  /* ...existing code... */
 }
 
 @media (max-width: 480px) {
