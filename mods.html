@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Games - Dabblebee</title>
+  <title>Mods - Dabblebee</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <button id="darkModeToggle" aria-label="Toggle dark mode" style="position: fixed; top: 1rem; right: 1rem; z-index: 2000; background: rgba(40,40,40,0.8); color: #fff; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.3rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.2s;"><span id="darkModeIcon">🌙</span></button>
   <header>
     <nav>
       <div class="logo">
@@ -26,43 +27,28 @@
       </ul>
     </nav>
   </header>
-
   <main>
-    <h1>Games</h1>
-    <p>Explore our collection of creative and engaging games.</p>
-
-    <section class="games-list">
-      <div class="game-card">
-        <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail" />
-        <h3>Game Title 1</h3>
-        <p>A brief description of the game goes here.</p>
-        <a href="#" class="btn">Play Now</a>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h2>Mods</h2>
+          <p>Discover, download, and share mods for Dabblebee games and software. Community creativity, all in one place!</p>
+        </div>
       </div>
-      <div class="game-card">
-        <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail" />
-        <h3>Game Title 2</h3>
-        <p>A brief description of the game goes here.</p>
-        <a href="#" class="btn">Play Now</a>
+    </section>
+    <section class="services" id="mods-list">
+      <div class="card">
+        <h3>Coming Soon</h3>
+        <p>Mod listings and upload features will be available here soon. Stay tuned!</p>
       </div>
-      <!-- Add more game cards as needed -->
     </section>
   </main>
-
   <footer>
     <p>&copy; 2025 dabblebee. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
   </footer>
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-46K4XXL2B0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-46K4XXL2B0');
-</script>
-<button id="darkModeToggle" aria-label="Toggle dark mode" style="position: fixed; top: 1rem; right: 1rem; z-index: 2000; background: rgba(40,40,40,0.8); color: #fff; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.3rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.2s;"><span id="darkModeIcon">🌙</span></button>
-<script>
+  <div class="bokeh-background"></div>
+  <script src="bokeh.js"></script>
+  <script>
     // Dark mode toggle logic
     const toggleBtn = document.getElementById('darkModeToggle');
     const icon = document.getElementById('darkModeIcon');
@@ -75,6 +61,6 @@
     const darkPref = localStorage.getItem('dabblebee-dark');
     setDarkMode(darkPref === null || darkPref === '1');
     toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
-    </script>
+  </script>
 </body>
 </html>
