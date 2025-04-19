@@ -47,33 +47,34 @@ nav {
   height: 40px;
 }
 
-.logo h1 {
-  margin: 0;
-  font-weight: 600;
+.logo-link h1 {
   color: var(--primary-color);
+  transition: color 0.2s ease-in-out;
+}
+
+.logo-link:hover h1 {
+  color: var(--text-color); /* Optional: change color on hover */
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap for more spacing */
   margin: 0;
   padding: 0;
-}
-
-.nav-links li {
-  margin: 0;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-color);
-  font-weight: 500;
+  font-size: 1.1rem; /* Slightly larger font size */
+  font-weight: 400; /* Slightly softer font weight */
+  padding: 0.5rem 0.2rem; /* Add some padding for touch targets */
+  transition: color 0.2s ease-in-out;
 }
 
 .nav-links a:hover {
   color: var(--primary-color);
-  text-decoration: underline;
 }
 
 .btn:hover {
@@ -236,17 +237,70 @@ footer {
   }
 }
 
+#darkModeToggle {
+  /* ...existing code... */
+  border-radius: 50%; /* Ensure it's perfectly round */
+  width: 40px; /* Adjusted size */
+  height: 40px;
+  font-size: 1.2rem; /* Adjusted icon size */
+  background: rgba(255, 255, 255, 0.6); /* Lighter background for light mode */
+  color: #333; /* Darker icon for light mode */
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Softer shadow */
+}
+
+.dark-mode #darkModeToggle {
+  background: rgba(40, 40, 60, 0.7); /* Adjusted dark mode background */
+  color: #fff; /* White icon for dark mode */
+}
+
+/* Mobile Nav Toggle Button */
+.mobile-nav-toggle {
+  display: none; /* Ensure it's hidden by default (desktop) */
+  /* ...existing code... */
+}
+
 /* RESPONSIVE STYLES */
 @media (max-width: 768px) {
   nav {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap; /* Allow wrapping */
+    position: relative; /* For absolute positioning of nav links */
+  }
+
+  .mobile-nav-toggle {
+    display: block; /* Show on mobile */
+    order: 1; /* Place after logo */
+    margin-left: auto; /* Push to the right */
   }
   
   .nav-links {
+    display: none; /* Hide by default on mobile */
     flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    width: 100%;
+    order: 3; /* Place below logo and toggle */
+    background: var(--card-bg);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex; /* Show when active */
+  }
+  
+  .nav-links li {
+    text-align: center;
+    padding: 0.8rem 0; /* Increase padding for mobile */
+  }
+
+  #darkModeToggle {
+    /* ...existing code... */
+    width: 36px; /* Keep mobile size */
+    height: 36px;
+    font-size: 1.1rem;
   }
   
   .hero-content {
@@ -378,6 +432,4 @@ footer {
   padding: 3rem 2rem;
   background: #fff0f8;
   text-align: center;
-}
-
 }

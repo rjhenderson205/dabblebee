@@ -15,6 +15,7 @@
           <h1 style="margin: 0; color: inherit;">dabblebee</h1>
         </a>
       </div>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -24,6 +25,9 @@
         <li><a href="games.html">Games</a></li>
         <li><a href="register.html">Register</a></li>
       </ul>
+      <button id="darkModeToggle" aria-label="Toggle dark mode">
+        <span id="darkModeIcon">🌙</span>
+      </button>
     </nav>
   </header>
 
@@ -75,6 +79,26 @@
       artworkInput.style.display = 'none';
     }
   });
+
+  // Dark mode toggle logic
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const icon = document.getElementById('darkModeIcon');
+  function setDarkMode(on) {
+    document.documentElement.classList.toggle('dark-mode', on);
+    icon.textContent = on ? '☀️' : '🌙';
+    localStorage.setItem('dabblebee-dark', on ? '1' : '0');
+  }
+  // On load, set mode from localStorage (default to dark mode)
+  const darkPref = localStorage.getItem('dabblebee-dark');
+  setDarkMode(darkPref === null || darkPref === '1');
+  toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+
+  // Mobile nav toggle logic
+  const mobileToggle = document.querySelector('.mobile-nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  mobileToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 </script>
 
 <!-- Google tag (gtag.js) -->
@@ -87,24 +111,8 @@
   gtag('config', 'G-46K4XXL2B0');
 </script>
 
-<button id="darkModeToggle" aria-label="Toggle dark mode" style="position: fixed; top: 1rem; right: 1rem; z-index: 2000; background: rgba(40,40,40,0.8); color: #fff; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.3rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.2s;"><span id="darkModeIcon">🌙</span></button>
-<script>
-    // Dark mode toggle logic
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const icon = document.getElementById('darkModeIcon');
-    function setDarkMode(on) {
-      document.documentElement.classList.toggle('dark-mode', on);
-      icon.textContent = on ? '☀️' : '🌙';
-      localStorage.setItem('dabblebee-dark', on ? '1' : '0');
-    }
-    // On load, set mode from localStorage (default to dark mode)
-    const darkPref = localStorage.getItem('dabblebee-dark');
-    setDarkMode(darkPref === null || darkPref === '1');
-    toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
-    </script>
-
-  <footer>
-    <p>&copy; 2025 dabblebee. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
-  </footer>
+<footer>
+  <p>&copy; 2025 dabblebee. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+</footer>
 </body>
 </html>
