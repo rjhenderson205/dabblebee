@@ -3,26 +3,30 @@
 
 :root {
   --bg-color: #fafaff;
-  --primary-color: #7B6EF6;  /* pastel purple */
+  --primary-color: #7B6EF6;
   --text-color: #333333;
   --card-bg: #ffffff;
   --card-shadow: rgba(0, 0, 0, 0.05);
+  --bokeh-bg: linear-gradient(to right, rgba(255, 120, 120, 0.36) 0%, rgba(255, 120, 120, 0.22) 5%, rgba(255, 120, 120, 0.10) 10%, rgba(230, 220, 255, 0.00) 45%, rgba(230, 220, 255, 0.00) 55%, rgba(255, 120, 120, 0.10) 90%, rgba(255, 120, 120, 0.22) 95%, rgba(255, 120, 120, 0.36) 100%);
 }
 
-/* BASIC RESETS */
+.dark-mode {
+  --bg-color: #181824;
+  --primary-color: #b7aaff;
+  --text-color: #f3f3fa;
+  --card-bg: #232336;
+  --card-shadow: rgba(0,0,0,0.25);
+  --bokeh-bg: linear-gradient(to right, rgba(255, 120, 120, 0.22) 0%, rgba(255, 120, 120, 0.13) 5%, rgba(255, 120, 120, 0.06) 10%, rgba(40, 30, 60, 0.00) 45%, rgba(40, 30, 60, 0.00) 55%, rgba(255, 120, 120, 0.06) 90%, rgba(255, 120, 120, 0.13) 95%, rgba(255, 120, 120, 0.22) 100%);
+}
+
 html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--bg-color);
+  background: var(--bg-color);
   color: var(--text-color);
 }
 
-/* HEADER */
-header {
-  background: #fff;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 6px var(--card-shadow);
+header, .hero, .services, footer {
+  background: var(--card-bg);
+  color: var(--text-color);
 }
 
 nav {
@@ -94,7 +98,6 @@ nav {
 /* HERO SECTION */
 .hero {
   padding: 4rem 2rem;
-  background: #fff;
 }
 
 .hero-content {
@@ -181,11 +184,56 @@ nav {
 
 /* FOOTER */
 footer {
-  background: #fff;
   text-align: center;
   padding: 1rem;
   box-shadow: 0 -2px 6px var(--card-shadow);
   margin-top: 3rem;
+}
+
+/* BOKEH BACKGROUND EFFECT */
+.bokeh-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1000; /* Place it above all content */
+  pointer-events: none; /* Allow interaction with underlying content */
+  background: var(--bokeh-bg);
+  /* Narrower reddish tint on the sides, center is clear */
+  opacity: 0.8;
+}
+
+.bokeh-particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5); /* Base particle color and transparency */
+  opacity: 0; /* Start invisible */
+  animation: bokeh-float 10s infinite ease-in-out;
+  filter: blur(4px); /* More blur for larger circles */
+  mix-blend-mode: lighten; /* Let orbs blend with the reddish tint */
+}
+
+.bokeh-white {
+  mix-blend-mode: screen; /* Intensifies glow when overlapping */
+  filter: blur(6px); /* Softer, glowy look */
+  z-index: 1;
+}
+
+/* Keyframes for the floating animation */
+@keyframes bokeh-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  25%, 75% {
+      opacity: 0.7; /* Fade in/out during middle */
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1); /* Move up slightly and grow */
+    opacity: 1;
+  }
 }
 
 /* RESPONSIVE STYLES */
