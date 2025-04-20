@@ -1,0 +1,11 @@
+# Node (if you use it later)
+node_modules/
+dist/
+build/
+
+# Mac / Windows junk
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
