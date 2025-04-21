@@ -9,9 +9,15 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html"><img src="logo.png" alt="Dabblebee Logo" class="header-logo"> Dabblebee</a></h1>
         <nav>
-            <ul>
+            <div class="logo">
+                <a href="index.html" class="logo-link" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                    <img class="logo-icon" src="littleicon.png" alt="Dabblebee Icon" />
+                    <h1 style="margin: 0;">dabblebee</h1>
+                </a>
+            </div>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="mods.html">Mods</a></li>
@@ -20,15 +26,22 @@
                 <li><a href="games.html">Games</a></li>
                 <li><a href="register.html">Register</a></li>
             </ul>
+            <!-- Add Dark Mode Toggle Button -->
+            <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
+                <span id="darkModeIcon">🌙</span>
+            </button>
         </nav>
     </header>
 
     <main>
-        <h2>About Dabblebee</h2>
-        <p>Welcome to Dabblebee! We are passionate about creating engaging games and useful mods.</p>
-        <p>Our mission is to provide high-quality entertainment and tools for the gaming community.</p>
-        <p>Learn more about our projects and what drives us.</p>
-        <!-- Add more content about the team, history, etc. later -->
+        <!-- Wrap content in a section for consistent styling -->
+        <section class="content-section" style="padding: 2rem; max-width: 800px; margin: 2rem auto; background: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 4px var(--card-shadow);">
+            <h2>About Dabblebee</h2>
+            <p>Welcome to Dabblebee! We are passionate about creating engaging games and useful mods.</p>
+            <p>Our mission is to provide high-quality entertainment and tools for the gaming community.</p>
+            <p>Learn more about our projects and what drives us.</p>
+            <!-- Add more content about the team, history, etc. later -->
+        </section>
     </main>
 
     <footer>
@@ -40,5 +53,34 @@
             </ul>
         </nav>
     </footer>
+
+    <!-- Add Bokeh Background and Scripts -->
+    <div class="bokeh-background"></div>
+    <script src="bokeh.js"></script>
+    <script>
+      // Dark mode toggle logic
+      const toggleBtn = document.getElementById('darkModeToggle');
+      const icon = document.getElementById('darkModeIcon');
+      function setDarkMode(on) {
+        document.documentElement.classList.toggle('dark-mode', on);
+        icon.textContent = on ? '☀️' : '🌙';
+        localStorage.setItem('dabblebee-dark', on ? '1' : '0');
+      }
+      // On load, set mode from localStorage (default to dark mode)
+      const darkPref = localStorage.getItem('dabblebee-dark');
+      setDarkMode(darkPref === null || darkPref === '1');
+      if (toggleBtn) {
+          toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+      }
+
+      // Mobile nav toggle logic
+      const mobileToggle = document.querySelector('.mobile-nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (mobileToggle && navLinks) {
+          mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+          });
+      }
+    </script>
 </body>
 </html>
