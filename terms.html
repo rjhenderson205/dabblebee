@@ -24,7 +24,8 @@
                     <h1 style="margin: 0;">dabblebee</h1>
                 </a>
             </div>
-            <ul>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button> <!-- Ensure button exists -->
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li> <!-- Corrected link -->
                 <li><a href="mods.html">Mods</a></li>
@@ -34,14 +35,13 @@
                 <li><a href="register.html">Register</a></li>
                 <!-- Removed duplicate links -->
             </ul>
-            <!-- Add Dark Mode Toggle Button -->
             <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
                 <span id="darkModeIcon">🌙</span>
             </button>
         </nav>
     </header>
 
-  <main>
+    <main>
     <h1>Terms of Use</h1>
     <p>Last updated: 4/11/2025</p>
 
@@ -90,26 +90,33 @@
             </ul>
         </nav>
     </footer>
-  <script>
-    // Dark mode toggle logic
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const icon = document.getElementById('darkModeIcon');
-    function setDarkMode(on) {
-      document.documentElement.classList.toggle('dark-mode', on);
-      icon.textContent = on ? '☀️' : '🌙';
-      localStorage.setItem('dabblebee-dark', on ? '1' : '0');
-    }
-    // On load, set mode from localStorage (default to dark mode)
-    const darkPref = localStorage.getItem('dabblebee-dark');
-    setDarkMode(darkPref === null || darkPref === '1');
-    toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
 
-    // Mobile nav toggle logic
-    const mobileToggle = document.querySelector('.mobile-nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
+    <!-- Add Bokeh Background and Scripts if not present -->
+    <div class="bokeh-background"></div>
+    <script src="bokeh.js"></script>
+    <script>
+      // Dark mode toggle logic (ensure it's present)
+      const toggleBtn = document.getElementById('darkModeToggle');
+      const icon = document.getElementById('darkModeIcon');
+      function setDarkMode(on) {
+        document.documentElement.classList.toggle('dark-mode', on);
+        if (icon) icon.textContent = on ? '☀️' : '🌙';
+        localStorage.setItem('dabblebee-dark', on ? '1' : '0');
+      }
+      const darkPref = localStorage.getItem('dabblebee-dark');
+      setDarkMode(darkPref === null || darkPref === '1');
+      if (toggleBtn) {
+          toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+      }
+
+      // Mobile nav toggle logic (ensure it's present)
+      const mobileToggle = document.querySelector('.mobile-nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (mobileToggle && navLinks) {
+          mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+          });
+      }
+    </script>
 </body>
 </html>

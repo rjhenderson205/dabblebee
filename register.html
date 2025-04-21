@@ -15,7 +15,8 @@
                     <h1 style="margin: 0;">dabblebee</h1>
                 </a>
             </div>
-            <ul>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button> <!-- Ensure button exists -->
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li> <!-- Corrected link -->
                 <li><a href="mods.html">Mods</a></li>
@@ -25,7 +26,6 @@
                 <li><a href="register.html">Register</a></li>
                 <!-- Removed duplicate links -->
             </ul>
-            <!-- Add Dark Mode Toggle Button -->
             <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
                 <span id="darkModeIcon">🌙</span>
             </button>
@@ -50,57 +50,6 @@
     </form>
 </main>
 
-<script>
-  // Dark mode toggle logic
-  const toggleBtn = document.getElementById('darkModeToggle');
-  const icon = document.getElementById('darkModeIcon');
-  function setDarkMode(on) {
-    document.documentElement.classList.toggle('dark-mode', on);
-    icon.textContent = on ? '☀️' : '🌙';
-    localStorage.setItem('dabblebee-dark', on ? '1' : '0');
-  }
-  // On load, set mode from localStorage (default to dark mode)
-  setDarkMode(localStorage.getItem('dabblebee-dark') === '1');
-
-  // Handle registration form submission
-  const registerForm = document.getElementById('register-form');
-  registerForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-      const response = await fetch('https://dabblebee-backend.onrender.com/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message);
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
-    }
-  });
-</script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-46K4XXL2B0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-46K4XXL2B0');
-</script>
-
 <footer>
         <p>&copy; 2025 Dabblebee. All rights reserved.</p>
         <nav>
@@ -110,5 +59,61 @@
             </ul>
         </nav>
     </footer>
+
+    <!-- Add Bokeh Background and Scripts if not present -->
+    <div class="bokeh-background"></div>
+    <script src="bokeh.js"></script>
+    <script>
+      // Dark mode toggle logic (ensure it's present)
+      const toggleBtn = document.getElementById('darkModeToggle');
+      const icon = document.getElementById('darkModeIcon');
+      function setDarkMode(on) {
+        document.documentElement.classList.toggle('dark-mode', on);
+        if (icon) icon.textContent = on ? '☀️' : '🌙';
+        localStorage.setItem('dabblebee-dark', on ? '1' : '0');
+      }
+      const darkPref = localStorage.getItem('dabblebee-dark');
+      setDarkMode(darkPref === null || darkPref === '1');
+      if (toggleBtn) {
+          toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+      }
+
+      // Mobile nav toggle logic (ensure it's present)
+      const mobileToggle = document.querySelector('.mobile-nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (mobileToggle && navLinks) {
+          mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+          });
+      }
+
+      // Handle registration form submission
+      const registerForm = document.getElementById('register-form');
+      registerForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+          const response = await fetch('https://dabblebee-backend.onrender.com/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password }),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            alert(data.message);
+          } else {
+            alert(data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      });
+    </script>
 </body>
 </html>
