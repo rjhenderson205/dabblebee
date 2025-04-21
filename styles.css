@@ -61,10 +61,11 @@ nav {
 .nav-links {
   list-style: none;
   display: flex;
+  flex-direction: row; /* Explicitly set row direction for desktop */
+  align-items: center; /* Align items vertically */
   gap: 1.5rem;
-  margin: 0; /* Remove auto margin */
+  margin: 0;
   padding: 0;
-  /* Centering handled by flexbox on nav */
 }
 
 .nav-links a {
@@ -268,13 +269,13 @@ footer {
 @media (max-width: 768px) {
   .nav-links {
     display: none; /* Hide links by default on mobile */
+    flex-direction: column; /* Change to column ONLY for mobile */
     position: absolute;
     top: 100%; /* Position below the header */
     left: 0;
     right: 0;
     width: auto; /* Let it take available width */
     background: var(--card-bg);
-    flex-direction: column;
     align-items: center;
     padding: 1rem 0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
