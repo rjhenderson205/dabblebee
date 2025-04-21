@@ -32,7 +32,7 @@ header, .hero, .services, footer {
 nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding: 0 1rem; /* Ensure some padding */
 }
 
 /* Logo container with icon */
@@ -60,7 +60,7 @@ nav {
   list-style: none;
   display: flex;
   gap: 1.5rem; /* Increased gap for more spacing */
-  margin: 0;
+  margin: 0 auto; /* Center the links horizontally */
   padding: 0;
 }
 
@@ -75,6 +75,21 @@ nav {
 
 .nav-links a:hover {
   color: var(--primary-color);
+}
+
+#darkModeToggle { /* Style for the button */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: auto; /* Push button to the right */
+    padding: 0.5rem;
+    line-height: 1; /* Adjust line height for better vertical alignment */
+    color: var(--text-color); /* Ensure icon color matches text */
+}
+
+#darkModeToggle:hover {
+    color: var(--primary-color); /* Add hover effect */
 }
 
 .btn:hover {
@@ -237,72 +252,45 @@ footer {
   }
 }
 
-#darkModeToggle {
-  /* ...existing code... */
-  border-radius: 50%; /* Ensure it's perfectly round */
-  width: 40px; /* Adjusted size */
-  height: 40px;
-  font-size: 1.2rem; /* Adjusted icon size */
-  background: rgba(255, 255, 255, 0.6); /* Lighter background for light mode */
-  color: #333; /* Darker icon for light mode */
-  transition: background 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Softer shadow */
-}
-
-.dark-mode #darkModeToggle {
-  background: rgba(40, 40, 60, 0.7); /* Adjusted dark mode background */
-  color: #fff; /* White icon for dark mode */
-}
-
-/* Mobile Nav Toggle Button */
-.mobile-nav-toggle {
-  display: none; /* Ensure it's hidden by default (desktop) */
-  /* ...existing code... */
-}
-
-/* RESPONSIVE STYLES */
 @media (max-width: 768px) {
   nav {
-    flex-wrap: wrap; /* Allow wrapping */
-    position: relative; /* For absolute positioning of nav links */
-    align-items: center; /* Vertically align items in the nav bar */
+    justify-content: space-between; /* Re-apply for mobile layout */
   }
 
-  .mobile-nav-toggle {
-    display: block; /* Show on mobile */
-    order: 1; /* Place after logo */
-    margin-left: auto; /* Push to the right */
-  }
-  
   .nav-links {
-    display: none; /* Hide by default on mobile */
-    flex-direction: column;
-    width: 100%;
-    order: 3; /* Place below logo and toggle */
-    background: var(--card-bg);
+    /* Reset margin for mobile stacked layout */
+    margin: 0;
     position: absolute;
-    top: 100%;
-    left: 0;
-    padding: 0.5rem 0; /* Reduce vertical padding for mobile dropdown */
-    box-shadow: 0 4px 6px var(--card-shadow);
-    z-index: 1000;
+    top: 60px; /* Adjust as needed */
+    right: 0;
+    background: var(--card-bg);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    display: none; /* Hidden by default */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000; /* Ensure nav is on top */
   }
 
   .nav-links.active {
     display: flex; /* Show when active */
   }
-  
-  .nav-links li {
-    text-align: center;
-    padding: 0.5rem 0; /* Reduce padding for individual mobile links */
+
+  .mobile-nav-toggle {
+    display: block; /* Show toggle on mobile */
+    order: 3; /* Ensure toggle is after logo */
+    margin-left: 1rem; /* Space from links/button */
   }
 
   #darkModeToggle {
-    order: 2; /* Place between toggle and links */
-    margin-left: auto; /* Push it towards the right, next to the toggle */
-    margin-right: 0.5rem; /* Add some space to its right */
+      order: 2; /* Place dark mode button before mobile toggle */
+      margin-left: 0; /* Reset margin */
   }
-  /* ...existing code... */
+
+  .logo {
+      order: 1; /* Ensure logo is first */
+  }
 }
 
 @media (max-width: 480px) {
