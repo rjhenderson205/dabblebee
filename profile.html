@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Dabblebee</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html" class="logo-link" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <img class="logo-icon" src="littleicon.png" alt="Dabblebee Icon" />
+          <h1 style="margin: 0;">dabblebee</h1>
+        </a>
+      </div>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mods.html">Mods</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="contacts.html">Contact</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="login.html">Log in</a></li>
+      </ul>
+      <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
+        <span id="darkModeIcon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <div class="profile-card">
+        <h2>Your Profile</h2>
+        <div id="profile-info">
+          <p>Loading profile...</p>
+        </div>
+        <button id="logoutBtn" class="btn" style="margin-top:1rem;">Log out</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Dabblebee. All rights reserved.</p>
+    <nav>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <div class="bokeh-background"></div>
+  <script src="bokeh.js"></script>
+  <script>
+    // Dark mode toggle logic
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const icon = document.getElementById('darkModeIcon');
+    function setDarkMode(on) {
+      document.documentElement.classList.toggle('dark-mode', on);
+      if (icon) icon.textContent = on ? '☀️' : '🌙';
+      localStorage.setItem('dabblebee-dark', on ? '1' : '0');
+    }
+    const darkPref = localStorage.getItem('dabblebee-dark');
+    setDarkMode(darkPref === null || darkPref === '1');
+    if (toggleBtn) {
+      toggleBtn.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+    }
+    // Mobile nav toggle logic
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+    // Profile fetch logic
+    async function loadProfile() {
+      const token = localStorage.getItem('dabblebee-token');
+      const profileInfo = document.getElementById('profile-info');
+      if (!token) {
+        profileInfo.innerHTML = '<p>You are not logged in. <a href="login.html">Log in</a></p>';
+        return;
+      }
+      try {
+        const response = await fetch('https://dabblebee-backend.onrender.com/api/profile', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          profileInfo.innerHTML = `<p><strong>Username:</strong> ${data.username}</p><p><strong>Email:</strong> ${data.email}</p>`;
+        } else {
+          profileInfo.innerHTML = '<p>Could not load profile. Please <a href="login.html">log in</a> again.</p>';
+        }
+      } catch (err) {
+        profileInfo.innerHTML = '<p>Error loading profile.</p>';
+      }
+    }
+    loadProfile();
+    // Logout logic
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('dabblebee-token');
+      window.location.href = 'login.html';
+    };
+  </script>
+</body>
+</html>

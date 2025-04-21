@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-46K4XXL2B0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-46K4XXL2B0');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-46K4XXL2B0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-46K4XXL2B0');
+  </script>
   <meta charset="UTF-8" />
-  <!-- Ensure proper scaling on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Meta description for SEO -->
-  <meta name="description" content="Dabblebee is an indie studio crafting creative games, art, and software with a playful, tech-forward twist." />
-  <title>dabblebee</title>
-  <!-- Favicon -->
+  <meta name="description" content="Login to your Dabblebee account." />
+  <title>Login - dabblebee</title>
   <link rel="icon" href="favicon.png" type="image/png">
-  <!-- Link to the external CSS file -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -41,58 +36,37 @@
         <li><a href="games.html">Games</a></li>
         <li><a href="login.html">Log in</a></li>
       </ul>
-      <!-- Re-add Dark Mode Toggle Button -->
       <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
-          <span id="darkModeIcon">🌙</span>
+        <span id="darkModeIcon">🌙</span>
       </button>
     </nav>
   </header>
 
   <main>
-  <!-- HERO SECTION -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <!-- Hero text container -->
-      <div class="hero-text">
-        <h2>Creating Fun, One Pixel at a Time</h2>
-        <p>
-          Dabblebee’s expertise spans game development, art & design, and custom software—all blended with creativity and tech vibes.
-        </p>
-      </div>
-      <!-- Hero image container for creative illustration -->
-      <div class="hero-image">
-        <img src="logo.png" alt="Creative Illustration" />
-      </div>
-    </div>
-  </section>
+    <section class="login-section">
+      <div class="login-card">
+        <h2>Login to Dabblebee</h2>
+        <form class="login-form" autocomplete="off">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" name="username" required autocomplete="username">
 
-  <!-- SERVICES SECTION -->
-  <section class="services" id="services">
-    <div class="card">
-      <img src="gameicon.png" alt="Game Development Icon" />
-      <h3>Game Development</h3>
-      <p>We create engaging and immersive gaming experiences.</p>
-    </div>
-    <div class="card">
-      <img src="articon.png" alt="Art & Design Icon" />
-      <h3>Art & Design</h3>
-      <p>Bringing ideas to life with creative visuals.</p>
-    </div>
-    <div class="card">
-      <img src="softwareicon.png" alt="Custom Software Icon" />
-      <h3>Custom Software</h3>
-      <p>Developing tailored solutions to meet your needs.</p>
-    </div>
-  </section>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password">
+
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p class="login-link">Don't have an account? <a href="register.html">Register here</a>.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Dabblebee. All rights reserved.</p>
     <nav>
-        <ul>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-        </ul>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+      </ul>
     </nav>
   </footer>
 
@@ -117,6 +91,32 @@
     const navLinks = document.querySelector('.nav-links');
     mobileToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
+    });
+
+    // Handle login form submission
+    const loginForm = document.querySelector('.login-form');
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      try {
+        const response = await fetch('https://dabblebee-backend.onrender.com/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          // Save token and redirect to profile
+          localStorage.setItem('dabblebee-token', data.token);
+          window.location.href = 'profile.html';
+        } else {
+          alert(data.message || 'Login failed.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
     });
   </script>
 </body>
