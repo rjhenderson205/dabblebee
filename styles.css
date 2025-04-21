@@ -32,7 +32,9 @@ header, .hero, .services, footer {
 nav {
   display: flex;
   align-items: center;
-  padding: 0 1rem; /* Ensure some padding */
+  justify-content: space-between; /* Use space-between for main layout */
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  position: relative; /* Needed for absolute positioning of mobile menu */
 }
 
 /* Logo container with icon */
@@ -59,9 +61,10 @@ nav {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem; /* Increased gap for more spacing */
-  margin: 0 auto; /* Center the links horizontally */
+  gap: 1.5rem;
+  margin: 0; /* Remove auto margin */
   padding: 0;
+  /* Centering handled by flexbox on nav */
 }
 
 .nav-links a {
@@ -77,15 +80,25 @@ nav {
   color: var(--primary-color);
 }
 
-#darkModeToggle { /* Style for the button */
+/* Mobile Nav Toggle - Hidden by default */
+.mobile-nav-toggle {
+    display: none; /* Hide on desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+#darkModeToggle {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
-    margin-left: auto; /* Push button to the right */
     padding: 0.5rem;
-    line-height: 1; /* Adjust line height for better vertical alignment */
-    color: var(--text-color); /* Ensure icon color matches text */
+    line-height: 1;
+    color: var(--text-color);
+    margin-left: 1rem; /* Add some space from links */
 }
 
 #darkModeToggle:hover {
@@ -253,24 +266,20 @@ footer {
 }
 
 @media (max-width: 768px) {
-  nav {
-    justify-content: space-between; /* Re-apply for mobile layout */
-  }
-
   .nav-links {
-    /* Reset margin for mobile stacked layout */
-    margin: 0;
+    display: none; /* Hide links by default on mobile */
     position: absolute;
-    top: 60px; /* Adjust as needed */
+    top: 100%; /* Position below the header */
+    left: 0;
     right: 0;
+    width: auto; /* Let it take available width */
     background: var(--card-bg);
-    width: 100%;
     flex-direction: column;
     align-items: center;
     padding: 1rem 0;
-    display: none; /* Hidden by default */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000; /* Ensure nav is on top */
+    z-index: 1000;
+    margin: 0; /* Reset margin */
   }
 
   .nav-links.active {
@@ -279,17 +288,17 @@ footer {
 
   .mobile-nav-toggle {
     display: block; /* Show toggle on mobile */
-    order: 3; /* Ensure toggle is after logo */
-    margin-left: 1rem; /* Space from links/button */
+    order: 3; /* Place it after the dark mode toggle */
   }
 
   #darkModeToggle {
       order: 2; /* Place dark mode button before mobile toggle */
-      margin-left: 0; /* Reset margin */
+      margin-left: auto; /* Push toggles to the right */
   }
 
   .logo {
       order: 1; /* Ensure logo is first */
+      margin-right: auto; /* Push logo to the left */
   }
 }
 
