@@ -39,7 +39,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="contacts.html">Contact</a></li>
         <li><a href="games.html">Games</a></li>
-        <li><a href="login.html">Log in</a></li>
+        <li id="login-profile-link"><a href="login.html">Log in</a></li>
       </ul>
       <!-- Re-add Dark Mode Toggle Button -->
       <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
@@ -122,6 +122,20 @@
     mobileToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
+
+    // Login/Profile nav logic
+    function updateLoginProfileLink() {
+      const token = localStorage.getItem('dabblebee-token');
+      const link = document.getElementById('login-profile-link');
+      if (link) {
+        if (token) {
+          link.innerHTML = '<a href="profile.html">Profile</a>';
+        } else {
+          link.innerHTML = '<a href="login.html">Log in</a>';
+        }
+      }
+    }
+    updateLoginProfileLink();
   </script>
 </body>
 </html>

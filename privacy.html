@@ -26,14 +26,13 @@
             </div>
             <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button> <!-- Ensure button exists -->
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li> <!-- Corrected link -->
-                <li><a href="mods.html">Mods</a></li>
-                <li><a href="#services">Services</a></li> <!-- Assuming this structure is desired -->
-                <li><a href="contacts.html">Contact</a></li> <!-- Corrected link -->
-                <li><a href="games.html">Games</a></li>
-                <li><a href="login.html">Log in</a></li>
-                <!-- Removed duplicate links -->
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="mods.html">Mods</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="contacts.html">Contact</a></li>
+              <li><a href="games.html">Games</a></li>
+              <li id="login-profile-link"><a href="login.html">Log in</a></li>
             </ul>
             <button id="darkModeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
                 <span id="darkModeIcon">🌙</span>
@@ -117,6 +116,19 @@
             navLinks.classList.toggle('active');
           });
       }
+
+      function updateLoginProfileLink() {
+        const token = localStorage.getItem('dabblebee-token');
+        const link = document.getElementById('login-profile-link');
+        if (link) {
+          if (token) {
+            link.innerHTML = '<a href="profile.html">Profile</a>';
+          } else {
+            link.innerHTML = '<a href="login.html">Log in</a>';
+          }
+        }
+      }
+      updateLoginProfileLink();
     </script>
 </body>
 </html>
